@@ -11,10 +11,10 @@ public class DriversSelenium {
 
     @BeforeClass
     public static  void setUp(){	
-    	System.setProperty("webdriver.chrome.driver","C:\\Users\\Cervello-Renan\\workspace\\driver\\chromedriver.exe");
+    	System.setProperty("webdriver.chrome.driver","C:\\Users\\10044\\Desktop\\Eclipse 2018\\chromedriver.exe");
 	    System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.Jdk14Logger");
         driver = new ChromeDriver();
-      //  driver.get("http://186.237.202.19/cervello_homolog/");
+    //  driver.get("http://10.254.16.80/17042019-v2018");
         driver.manage().window().maximize();
     }
 

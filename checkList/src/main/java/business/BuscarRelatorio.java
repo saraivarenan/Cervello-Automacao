@@ -58,9 +58,9 @@ public class BuscarRelatorio extends InicializadorBrowser  {
 	}
 	
 	public void buscarRelatorioRel (String nomeRelatorio) throws Exception {
-		metodos.tirarFotoTela(driver, "C://Users//Cervello-Renan//Documents//Screen//Acessar_Ambiente.png");
+		metodos.tirarFotoTela(driver, "C://Users//10044//Desktop//Eclipse 2018//evidencias//Acessar_Ambiente.png");
 		metodos.iframeRelatorio();
-		metodos.tirarFotoTela(driver, "C://Users//Cervello-Renan//Documents//Screen//Acessar_Relatorios.png");
+		metodos.tirarFotoTela(driver, "C://Users//10044//Desktop//Eclipse 2018//evidencias//Acessar_Relatorios.png");
 		metodos.tempo(4);
 		buscarRelatorio.sendKeys(nomeRelatorio, Keys.ENTER);
 		metodos.tempo(3);

@@ -9,20 +9,20 @@ import org.openqa.selenium.support.FindBy;
 public class FazerLogin extends InicializadorBrowser {
 	MetodoUtil metodos = new MetodoUtil(driver);
 	
-	 	@FindBy(id="UC_Login1_txtLogin")
+	 	@FindBy(id="login")
 	    private WebElement userName;
 
-	    @FindBy(id="UC_Login1_txtSenha")
+	    @FindBy(id="senha")
 	    private WebElement userPass;
 	    
-	    @FindBy(id="UC_Login1_btnLogarADM")
-	    private WebElement btnEscolherUsuario;
+	//    @FindBy(id="outrologin")
+	 //   private WebElement btnEscolherUsuario;
 	    
-	    @FindBy(id="UC_Login1_txtLoginADM")
+	    @FindBy(id="outrologin")
 	    private WebElement escolherUsuario;
 
 	    
-	    @FindBy(id="UC_Login1_btnLogar")
+	    @FindBy(xpath="//button[contains(text(), 'entrar')]")
 	    private WebElement btnLogar;
 
 	    public FazerLogin(ChromeDriver driver) {
@@ -42,7 +42,8 @@ public class FazerLogin extends InicializadorBrowser {
 	    public void escolherUsuario(String usuario){
 	    	escolherUsuario.clear();
 	    	escolherUsuario.sendKeys(usuario);
-	    	btnEscolherUsuario.click();
+	    //	btnEscolherUsuario.click();
+	    	escolherUsuario.submit();
 	    }
 
 

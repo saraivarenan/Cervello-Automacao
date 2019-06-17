@@ -11,9 +11,10 @@ import frontEnd.ExecutarFazerLogin;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-	ExecutarFazerLogin.class,
-	ExecutarCriarTopico.class,
+	//ExecutarFazerLogin.class,
+	//ExecutarCriarTopico.class,
 	ExecutarCriarArtigo.class
+	
 }
 )
 

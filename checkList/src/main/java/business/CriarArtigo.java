@@ -2,10 +2,8 @@ package business;
 
 import java.awt.AWTException;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import backEnd.ParametroFerramentaArtigo;
@@ -18,11 +16,13 @@ public class CriarArtigo extends InicializadorBrowser {
 	FerrramentaEdicaoArtigo editordeArtigo = new FerrramentaEdicaoArtigo(driver);
 	ParametroFerramentaArtigo valoresFerramentaEdicao = new ParametroFerramentaArtigo();
 	
-	@FindBy(xpath="//span[contains(text(),'Ferramentas')]")	
-	private WebElement criaArtigo;
+
 	
-	@FindBy(xpath="//span[contains(text(),'Cadastro de Artigos')]")	
+	@FindBy(xpath="//a[contains(text(),'Novo artigo')]")	
 	private WebElement articulosArtigos;
+	
+	@FindBy(xpath="//a[@href='#close-modal']")
+	private WebElement closeImagem;
 	
 	@FindBy(xpath="//iframe[contains(@class, 'col-xs-12')]")
 	private WebElement camposArtigos;
@@ -30,10 +30,10 @@ public class CriarArtigo extends InicializadorBrowser {
 	@FindBy(id="ddlTopico")
 	private WebElement topicoTema;
 	
-	@FindBy(id="ddlIdioma")
+	@FindBy(id="ddlLingua")
 	private WebElement idioma;
 	
-	@FindBy(id="txtNome")
+	@FindBy(id="txtTitulo")
 	private WebElement nomeArtigo;
 	
 	@FindBy(id="txtDescricao")
@@ -42,17 +42,22 @@ public class CriarArtigo extends InicializadorBrowser {
 	@FindBy(id="txtPalavraChave")
 	private WebElement palavraChave;
 	
-	@FindBy(xpath="//div[@id='spanImagemNoticia']/div/span/label")
+	@FindBy(xpath="//a[@href='#modalImagem']")
 	//*[@id='spanImagemNoticia']/div/span/label
 	private WebElement btnAnexo;
 	
+//Selecionar imagem de uma pasta
+	
+	@FindBy(id="flImgIco")
+	private WebElement selecionarImaegem;
 	@FindBy(id="txtSequencia")
 	private WebElement sequencia;
 	
-	@FindBy(id="btnEditarArtigo")
+	@FindBy(xpath="//a[@href='#editorArtigo']")
 	private WebElement editarConteudo;
-		
-	@FindBy(id="btnSalvarArtigo")
+	
+	
+	@FindBy(id="btnSalvar")
 	private WebElement btnSalvar;
 	
 	@FindBy(id="btnPublicarArtigo")
@@ -67,18 +72,12 @@ public class CriarArtigo extends InicializadorBrowser {
 	}
 	
 	public void criarArtigo(String valorTema, String valorIdioma, String valorNome, String valorDescricao, String valorpalavraChave, String caminhoArquivo, String valorSequencia ) throws AWTException{
-		metodos.tempo(2);
-		metodos.iframePaiBaseConhecimento();
-		metodos.tempo(2);
-		criaArtigo.click();
-		metodos.tempo(2);
-		Actions act = new Actions(driver);
-		act.doubleClick(criaArtigo).build().perform();
+		
+		
 		metodos.tempo(1);
 		articulosArtigos.click();
 		metodos.tempo(4);
-		driver.switchTo().parentFrame();
-		driver.switchTo().frame(camposArtigos);	
+
 		metodos.tempo(3);
 		metodos.SelectDropDown(topicoTema, valorTema);
 		metodos.tempo(2);
@@ -92,19 +91,22 @@ public class CriarArtigo extends InicializadorBrowser {
 		metodos.tempo(2);
 		btnAnexo.click();
 		metodos.tempo(2);
-		metodos.uploadArquivo(caminhoArquivo);
+		selecionarImaegem.click();
 		metodos.tempo(2);
+		metodos.uploadArquivo(caminhoArquivo);
+		metodos.tempo(3);
+		
+		closeImagem.click();
+		metodos.tempo(4);
 		//Abrir o editot de arquivo
 		editarConteudo.click();
-		
-		editordeArtigo.EditarArquivo(valoresFerramentaEdicao.getConteudoArtigo(), valoresFerramentaEdicao.getNomeLink(), valoresFerramentaEdicao.getHiperLink());
-		
-		driver.switchTo().parentFrame();
-		driver.switchTo().frame(camposArtigos);	
-		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btnSalvar);
-		metodos.tempo(2);
-		btnSalvar.click();
-		driver.switchTo().alert().accept();		
+		metodos.tempo(3);
+//driver.switchTo().frame(PainelConteudoArtigo);
+
+editordeArtigo.EditarArquivo(valoresFerramentaEdicao.getConteudoArtigo(), valoresFerramentaEdicao.getNomeLink(), valoresFerramentaEdicao.getHiperLink());
+metodos.tempo(3);
+
+		btnSalvar.click();	
 		metodos.tempo(3);
 		metodos.implicitWait(20);
 		publicarArtigo.click();
@@ -112,7 +114,7 @@ public class CriarArtigo extends InicializadorBrowser {
 		driver.switchTo().alert().accept();
 		metodos.implicitWait(20);
 		mensagemSucesso.click();
-	//	assertTrue(mensagemSucesso.getText().equals("Artículo publicado con éxito"));
+	//	assertTrue(mensagemSucesso.getText().equals("ArtÃ­culo publicado con Ã©xito"));
 		
 		System.out.println(" valor: "+mensagemSucesso.getText());
 		
