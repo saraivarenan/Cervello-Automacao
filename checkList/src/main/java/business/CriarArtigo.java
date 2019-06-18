@@ -87,6 +87,11 @@ public class CriarArtigo extends InicializadorBrowser {
 	@FindBy(xpath="//h2[contains(.,'AutoMatico script')]")
 	private WebElement verificarArtigoEditado;
 	
+	@FindBy(id="buscaPortal")
+	private WebElement pesquisaGlobal;	
+	
+	@FindBy(xpath="//a[contains(text(),'AutoMatico script')]")
+	private WebElement pesquisarArtigos;
 	
 	public CriarArtigo(ChromeDriver driver) {
 		super(driver);
@@ -167,6 +172,11 @@ public class CriarArtigo extends InicializadorBrowser {
 		aprovarArtigo.click();
 		metodos.tempo(3);
 		System.out.println(verificarArtigoEditado.getText());
+	}
+	public void buscarArtigo(String nomeArtigo) {
+		pesquisaGlobal.click();
+		pesquisaGlobal.sendKeys(nomeArtigo);
+		pesquisarArtigos.click();
 	}
 
 	
