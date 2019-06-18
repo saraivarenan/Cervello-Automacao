@@ -2,6 +2,9 @@ package business;
 
 import java.awt.AWTException;
 
+import javax.imageio.stream.MemoryCacheImageOutputStream;
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -60,11 +63,29 @@ public class CriarArtigo extends InicializadorBrowser {
 	@FindBy(id="btnSalvar")
 	private WebElement btnSalvar;
 	
-	@FindBy(id="btnPublicarArtigo")
+	@FindBy(id="lnkPublicarArtigo")
 	private WebElement publicarArtigo;
 	
 	@FindBy(xpath="/html/body/div[2]/span[3]")
 	private WebElement mensagemSucesso;
+	
+	
+	//Modo Edição -- Base de Conhecimento
+	
+	@FindBy(xpath="//a[contains(.,'Meus artigos')]")	
+	private WebElement meuArtigos;
+	
+	@FindBy(xpath="//p[contains(.,'AutoMatico script')]")	
+	private WebElement artigoCriado;
+	
+	@FindBy(xpath="//i[contains(@class,'fas fa-edit')]")
+	private WebElement editaArtigo;
+	
+	@FindBy(xpath="//a[contains(@class,'acao--simples')]")
+	private WebElement aprovarArtigo;
+	
+	@FindBy(xpath="//h2[contains(.,'AutoMatico script')]")
+	private WebElement verificarArtigoEditado;
 	
 	
 	public CriarArtigo(ChromeDriver driver) {
@@ -103,26 +124,51 @@ public class CriarArtigo extends InicializadorBrowser {
 		metodos.tempo(3);
 //driver.switchTo().frame(PainelConteudoArtigo);
 
-editordeArtigo.EditarArquivo(valoresFerramentaEdicao.getConteudoArtigo(), valoresFerramentaEdicao.getNomeLink(), valoresFerramentaEdicao.getHiperLink());
-metodos.tempo(3);
+		editordeArtigo.EditarArquivo(valoresFerramentaEdicao.getConteudoArtigo(), valoresFerramentaEdicao.getNomeLink(), valoresFerramentaEdicao.getHiperLink());
+		metodos.tempo(3);
 
 		btnSalvar.click();	
 		metodos.tempo(3);
 		metodos.implicitWait(20);
 		publicarArtigo.click();
 		metodos.tempo(1);
-		driver.switchTo().alert().accept();
-		metodos.implicitWait(20);
-		mensagemSucesso.click();
+	//	driver.switchTo().alert().accept();
+	//	metodos.implicitWait(20);
+	//	mensagemSucesso.click();
 	//	assertTrue(mensagemSucesso.getText().equals("ArtÃ­culo publicado con Ã©xito"));
 		
-		System.out.println(" valor: "+mensagemSucesso.getText());
+	//	System.out.println(" valor: "+mensagemSucesso.getText());
 		
 		//*[@id="btnCloseModalFrame"]
 		//class="close"
 		//*[@id="dvArtigo-minibox"]/div[2]/div[2]/div/div[3]
 		
 	}
+	public void editarArtigo(String nomeArtigo) throws AWTException {
+		metodos.tempo(2);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", articulosArtigos);
+		meuArtigos.click();
+		metodos.tempo(3);
+		artigoCriado.click();
+		metodos.tempo(3);
+		editaArtigo.click();
+		metodos.tempo(2);
+		editarConteudo.click();
+		
+		editordeArtigo.EdicaoArtigo("Artigo Editado via teste de Automação - Script", valoresFerramentaEdicao.getImagemedicao(), valoresFerramentaEdicao.getHiperLink());
+		metodos.tempo(3);
+		btnSalvar.click();
+		metodos.tempo(3);
+		publicarArtigo.click();
+		metodos.implicitWait(30);
+		meuArtigos.click();
+		metodos.tempo(2);
+		artigoCriado.click();
+		aprovarArtigo.click();
+		metodos.tempo(3);
+		System.out.println(verificarArtigoEditado.getText());
+	}
+
 	
 	
 	

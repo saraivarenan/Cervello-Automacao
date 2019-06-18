@@ -9,7 +9,7 @@ public class ParametroCriarArtigo {
 	String palavraChave ="automação";
 	String sequencia = "1";
 	String conteudo = " Teste Arquivo Qualidade. Automação de teste";
-	String caminhoArquivo= "C:\\Users\\Renan\\Desktop\\Arquivos de Teste\\logoCer.png" ;
+	String caminhoArquivo= "C:\\Users\\10044\\Desktop\\imagens teste\\400x300.png" ;
 	
 	public String getTematopico() {
 		return tematopico;

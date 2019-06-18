@@ -5,6 +5,10 @@ public class ParametroFerramentaArtigo {
 	String conteudoArtigo = "Artigo Feito pelo script de automação";
 	String nomeLink = "Cervello Alpina";
 	String hiperLink = "http://www.suportecervello.com.br/Cervello/";
+	
+	String conteudoEditado ="Artigo editado via teste automático";
+	String imagemedicao = "C:\\Users\\10044\\Desktop\\imagens teste\\ImageEdicao.png";
+	
 	public String getConteudoArtigo() {
 		return conteudoArtigo;
 	}
@@ -22,6 +26,18 @@ public class ParametroFerramentaArtigo {
 	}
 	public void setHiperLink(String hiperLink) {
 		this.hiperLink = hiperLink;
+	}
+	public String getConteudoEditado() {
+		return conteudoEditado;
+	}
+	public void setConteudoEditado(String conteudoEditado) {
+		this.conteudoEditado = conteudoEditado;
+	}
+	public String getImagemedicao() {
+		return imagemedicao;
+	}
+	public void setImagemedicao(String imagemedicao) {
+		this.imagemedicao = imagemedicao;
 	}
 	
 	

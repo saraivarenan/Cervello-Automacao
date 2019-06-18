@@ -14,8 +14,8 @@ public class ExecutarFazerLogin extends DriversSelenium {
 	
 	
 	public void fazerLogin(String usuarioAdm, String usuario, String senha){
-		//driver.get("http://10.254.16.80/17042019-v2018-Home/");
-		driver.get("http://186.237.202.19/CervelloPortal/");
+		driver.get("http://10.254.16.80/17042019-v2018/");
+		//driver.get("http://186.237.202.19/CervelloPortal/");
 		regrasLogin.user(usuarioAdm, senha);
 		regrasLogin.submit();
 		metodos.tempo(2);

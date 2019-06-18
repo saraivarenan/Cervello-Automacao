@@ -3,7 +3,7 @@ package backEnd;
 public class ParametroCriarTopico {
 	
 	String temaPadre = "(O MESMO)";
-	String descricao= "Tópico Automatico";
+	String descricao= "Base de Conhecimento";
 	String orden = "1";
 	
 	public String getTemaPadre() {
