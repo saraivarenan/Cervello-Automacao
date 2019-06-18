@@ -1,7 +1,6 @@
 package business;
 
 import java.awt.AWTException;
-import java.lang.reflect.InvocationTargetException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -153,6 +152,8 @@ while (!resultImagem.equals("@@" ))
 
 		 if (resultImagem.equals("ImageEdicao.png")) 
 		 {
+			 imagemExiste.click();
+			 inseririmagemEditor.click();
 		break;
 		 }
 	}

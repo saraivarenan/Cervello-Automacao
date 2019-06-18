@@ -2,9 +2,8 @@ package business;
 
 import java.awt.AWTException;
 
-import javax.imageio.stream.MemoryCacheImageOutputStream;
-
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -173,10 +172,18 @@ public class CriarArtigo extends InicializadorBrowser {
 		metodos.tempo(3);
 		System.out.println(verificarArtigoEditado.getText());
 	}
-	public void buscarArtigo(String nomeArtigo) {
+	public void buscarArtigo(String nomeArtigo) throws Exception {
+		metodos.tirarFotoTela(driver, "C:\\Users\\10044\\Documents\\Screen\\Artigos\\Página_Inicial.png");
+		metodos.tempo(3);
 		pesquisaGlobal.click();
 		pesquisaGlobal.sendKeys(nomeArtigo);
+		pesquisaGlobal.sendKeys(Keys.ENTER);
+		metodos.tempo(1);
+		metodos.tirarFotoTela(driver, "C:\\Users\\10044\\Documents\\Screen\\Artigos\\Pesquisar_Artigo.png");
+		metodos.tempo(2);
 		pesquisarArtigos.click();
+		metodos.tempo(3);
+		metodos.tirarFotoTela(driver, "C:\\Users\\10044\\Documents\\Screen\\Artigos\\Artigo_Consultado.png");
 	}
 
 	
