@@ -135,7 +135,7 @@ public class CriarArtigo extends InicializadorBrowser {
 		metodos.tempo(3);
 		metodos.implicitWait(20);
 		publicarArtigo.click();
-		metodos.tempo(1);
+		metodos.tempo(5);
 	//	driver.switchTo().alert().accept();
 	//	metodos.implicitWait(20);
 	//	mensagemSucesso.click();
@@ -154,7 +154,7 @@ public class CriarArtigo extends InicializadorBrowser {
 		meuArtigos.click();
 		metodos.tempo(3);
 		artigoCriado.click();
-		metodos.tempo(3);
+		metodos.tempo(5);
 		editaArtigo.click();
 		metodos.tempo(2);
 		editarConteudo.click();
@@ -164,11 +164,14 @@ public class CriarArtigo extends InicializadorBrowser {
 		btnSalvar.click();
 		metodos.tempo(3);
 		publicarArtigo.click();
-		metodos.implicitWait(30);
-		meuArtigos.click();
+		metodos.tempo(4);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", meuArtigos);
 		metodos.tempo(2);
+		meuArtigos.click();
+		metodos.tempo(4);
 		artigoCriado.click();
-		aprovarArtigo.click();
+		metodos.tempo(4);
+	//	aprovarArtigo.click();
 		metodos.tempo(3);
 		System.out.println(verificarArtigoEditado.getText());
 	}
