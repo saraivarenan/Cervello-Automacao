@@ -1,7 +1,10 @@
 package business;
 
+import static org.junit.Assert.assertTrue;
+
 import java.awt.AWTException;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -92,6 +95,42 @@ public class CriarArtigo extends InicializadorBrowser {
 	@FindBy(xpath="//a[contains(text(),'AutoMatico script')]")
 	private WebElement pesquisarArtigos;
 	
+	//Aprovar Artigo pendente como aprovador da base de conhecimento	
+	@FindBy(xpath="//a[contains(text(),'Artigos pendentes: ')]")	
+	private WebElement artigosPendentes;
+	
+	@FindBy(xpath= "//p[contains(.,'AutoMatico script')]")
+	private WebElement artigoAprovar;
+	
+	
+	@FindBy(xpath= "//a[contains(@class,'acao--cancela')]")
+	private WebElement btnCancelarPendentes;
+	
+	//Comentar Artigo
+	@FindBy(id= "txtComentario")
+	private WebElement txtComentario;
+	
+	@FindBy(id="btnComentar")
+	private WebElement btnComentar;
+	
+	@FindBy(xpath="//a[contains(@class, 'acao--simples lnkAprovarComentario')]")
+	private WebElement btnAprovarComentado;
+	
+	@FindBy(xpath="//a[contains(@class, 'acao--cancela lnkreprovacomentario')]")
+	private WebElement btnReprovarComentado;
+	
+	@FindBy(xpath="//a[contains(@class,'acao--simples lnkAprovarComentario')]")
+	private WebElement aprovarComentario;
+	
+	@FindBy(xpath="//a[contains(@class,'fas fa-times vermelho lnkDesativarComentario')]")
+	private WebElement excluirComentario;
+	
+	@FindBy(id="txtMotivo")
+	private WebElement motivoReprovacaocomentario;
+	
+	@FindBy(id="btnEnviarMensagemReprovacao")
+	private WebElement btnEnviarReprovacaoComentario;
+	
 	public CriarArtigo(ChromeDriver driver) {
 		super(driver);
 	}
@@ -179,8 +218,7 @@ public class CriarArtigo extends InicializadorBrowser {
 		metodos.tirarFotoTela(driver, "C:\\Users\\10044\\Documents\\Screen\\Artigos\\Página_Inicial.png");
 		metodos.tempo(3);
 		pesquisaGlobal.click();
-		pesquisaGlobal.sendKeys(nomeArtigo);
-		pesquisaGlobal.sendKeys(Keys.ENTER);
+		pesquisaGlobal.sendKeys(nomeArtigo,Keys.ENTER);
 		metodos.tempo(1);
 		metodos.tirarFotoTela(driver, "C:\\Users\\10044\\Documents\\Screen\\Artigos\\Pesquisar_Artigo.png");
 		metodos.tempo(2);
@@ -188,8 +226,55 @@ public class CriarArtigo extends InicializadorBrowser {
 		metodos.tempo(3);
 		metodos.tirarFotoTela(driver, "C:\\Users\\10044\\Documents\\Screen\\Artigos\\Artigo_Consultado.png");
 	}
-
-	
+	public void aprovarArtigo(String nomeArtigo) throws Exception{
+		//Clicar no link Pendentes
+		artigosPendentes.click();
+		metodos.tempo(3);
+		//Escolher aritgo para aprovar
+		artigoAprovar.click();
+		metodos.tempo(3);
+		//Clicar em aprovar no artigo pendente
+		aprovarArtigo.click();
+		metodos.tempo(2);
+		assertTrue("Artigo Aprovado", verificarArtigoEditado.getText().equals("AutoMatico script"));
+		
+	}
+	public void comentarArtigo(String nomeArtigo, String comentario, String motivoReporvar) throws Exception{
+		pesquisaGlobal.sendKeys(nomeArtigo,Keys.ENTER);
+		metodos.tempo(2);
+		pesquisarArtigos.click();
+		metodos.tempo(3);
+		txtComentario.click();
+		txtComentario.sendKeys(comentario);
+		btnComentar.click();
+		metodos.tempo(2);
+		aprovarComentario.click();
+		metodos.tempo(2);
+		excluirComentario.click();
+		metodos.tempo(2);
+		driver.switchTo().alert().accept();
+		metodos.tempo(2);
+		txtComentario.click();
+		txtComentario.sendKeys(comentario);
+		metodos.tempo(2);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btnComentar);
+		btnComentar.click();
+		metodos.tempo(2);
+		btnReprovarComentado.click();
+		metodos.tempo(2);
+		motivoReprovacaocomentario.click();
+		motivoReprovacaocomentario.sendKeys(motivoReporvar);
+		metodos.tempo(2);
+		btnEnviarReprovacaoComentario.click();
+		metodos.tempo(2);
+		txtComentario.click();
+		txtComentario.sendKeys(comentario);
+		metodos.tempo(2);
+		btnComentar.click();
+		metodos.tempo(2);
+		aprovarComentario.click();
+		metodos.tempo(2);
+	}
 	
 	
 

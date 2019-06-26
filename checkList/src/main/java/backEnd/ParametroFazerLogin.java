@@ -2,9 +2,9 @@ package backEnd;
 
 public class ParametroFazerLogin {
 	
-	String usuarioAdm = "renan.elias" ;
-	String senha = "cervello02";
-	String usuario = "renan.elias";
+	String usuarioAdm = "cervello";
+	String senha = "cervello01";
+	String usuario = "cervello";
 	
 	public String getUsuario() {
 		return usuario;
