@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -154,6 +155,16 @@ public class MetodoUtil extends InicializadorBrowser  {
 		 
 		 
 	 }
+	 public boolean verificarElemento(WebElement LocalElemnt ) throws Exception {
+		    try {
+		    	LocalElemnt.getText();
+		        System.out.println("Elemento Existe");
+		        return true;
+
+		    } catch (NoSuchElementException e) {
+		        System.out.println("Elemento não existe");
+		        return false;
+		    }
 	
-	
+}
 }

@@ -5,7 +5,6 @@ import org.junit.Test;
 import backEnd.ParametroComentarArtigo;
 import backEnd.ParametroCriarArtigo;
 import business.CriarArtigo;
-import business.PaginaInicial;
 import utilitarios.DriversSelenium;
 
 public class ExecutarComentarArtigo extends DriversSelenium {

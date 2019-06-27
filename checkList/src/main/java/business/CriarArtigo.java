@@ -4,7 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.AWTException;
 
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -130,6 +132,29 @@ public class CriarArtigo extends InicializadorBrowser {
 	
 	@FindBy(id="btnEnviarMensagemReprovacao")
 	private WebElement btnEnviarReprovacaoComentario;
+	
+	//Relacionar Categorização	
+	@FindBy(xpath="//span[contains(.,'Relacionamentos')]")
+	private WebElement abaRelacionnamento;
+	
+	@FindBy(id="ddlProjeto")
+	private WebElement relacionamentoProjeto;
+	
+	@FindBy(id="ddlTipo")
+	private WebElement relacionnamentoTipo;
+	
+	@FindBy(id="ddlAssunto")
+	private WebElement relacionnamentoAssunto;
+	
+	@FindBy(id="lnkAddAssunto")
+	private WebElement btnRelacionarCategorizacao;
+	
+	@FindBy(xpath="//a[contains(@class,'fas fa-times vermelho btnExcluiRelProjTipAssu')]")
+	private WebElement btnExcluirRelacionamento;
+	
+	@FindBy(xpath="//*[@id=\"tblRelProjTipAssun\"]/tbody/tr")
+	private WebElement tabelaRelacionamento;
+
 	
 	public CriarArtigo(ChromeDriver driver) {
 		super(driver);
@@ -275,7 +300,58 @@ public class CriarArtigo extends InicializadorBrowser {
 		aprovarComentario.click();
 		metodos.tempo(2);
 	}
-	
+	public void relacionarCategorizacao (String nomeArtigo, String projetoRel, String tipoRel,  String assuntoRel ) throws Exception {
+		pesquisaGlobal.sendKeys(nomeArtigo,Keys.ENTER);
+		metodos.tempo(2);
+		pesquisarArtigos.click();
+		metodos.tempo(3);
+		editaArtigo.click();
+		metodos.tempo(2);
+		abaRelacionnamento.click();
+		metodos.tempo(2);
+		metodos.SelectDropDown(relacionamentoProjeto, projetoRel);
+		metodos.tempo(2);
+		metodos.SelectDropDown(relacionnamentoTipo, tipoRel);
+		metodos.tempo(2);
+		metodos.SelectDropDown(relacionnamentoAssunto, assuntoRel);
+		metodos.tempo(2);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btnRelacionarCategorizacao);
+		//btnRelacionarCategorizacao.click();
+		metodos.tempo(3);
+		//*[@id="tblRelProjTipAssun"]/tbody/tr[1]/td[2]
+		
+	//	/boolean valorestabela = tabelaRelacionamento.isDisplayed();
+		//System.out.println(valorestabela);
+		//if(valorestabela==true) {
+			
+
+	//	}
+	//	else {
+			
+			if (metodos.verificarElemento(tabelaRelacionamento) ==true) {
+				
+				btnExcluirRelacionamento.click();
+			}else {
+			
+			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btnRelacionarCategorizacao);
+			btnRelacionarCategorizacao.click();
+		}
+		btnSalvar.click();
+		metodos.tempo(3);
+		
+		//*[@id="tblRelProjTipAssun"]/tbody/tr
+		//ystem.out.println(driver.findElement(By.xpath("//*[@id=\"tblRelProjTipAssun\"]/tbody/tr")).getText());
+		//assertTrue("Relacionamento não existe", driver.findElement(By.xpath("//*[@id=\"tblRelProjTipAssun\"]/tbody/tr")).getText().equals("Aplicativos Adobe Acrobat - Professional Configurar"));
+				//*[@id="tblRelProjTipAssun"]/tbody/tr[2]
+		
+		
+	//	WebElement element = btnExcluirRelacionamento; // Your element
+	//	JavascriptExecutor executor = (JavascriptExecutor) driver;
+		//Object aa=executor.executeScript("var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;", element);
+		//System.out.println(aa.toString());
+		
+		
+	}
 	
 
 }

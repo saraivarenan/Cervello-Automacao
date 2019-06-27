@@ -10,6 +10,9 @@ public class ParametroCriarArtigo {
 	String sequencia = "1";
 	String conteudo = " Teste Arquivo Qualidade. Automação de teste";
 	String caminhoArquivo= "C:\\Users\\10044\\Desktop\\imagens teste\\400x300.png" ;
+	String projetoRel = "Aplicativos";
+	String tipoRel = "Adobe Acrobat - Professional";
+	String assuntoRel = "Configurar";
 	
 	public String getTematopico() {
 		return tematopico;
@@ -59,8 +62,32 @@ public class ParametroCriarArtigo {
 	public void setCaminhoArquivo(String caminhoArquivo) {
 		this.caminhoArquivo = caminhoArquivo;
 	}
+	public ParametroCriarTopico getValoresTopico() {
+		return valoresTopico;
+	}
+	public void setValoresTopico(ParametroCriarTopico valoresTopico) {
+		this.valoresTopico = valoresTopico;
+	}
+	public String getProjetoRel() {
+		return projetoRel;
+	}
+	public void setProjetoRel(String projetoRel) {
+		this.projetoRel = projetoRel;
+	}
+	public String getTipoRel() {
+		return tipoRel;
+	}
+	public void setTipoRel(String tipoRel) {
+		this.tipoRel = tipoRel;
+	}
+	public String getAssuntoRel() {
+		return assuntoRel;
+	}
+	public void setAssuntoRel(String assuntoRel) {
+		this.assuntoRel = assuntoRel;
+	}
 	
-
+	
 			
 			
 	
