@@ -3,6 +3,7 @@ package business;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.AWTException;
+import java.util.NoSuchElementException;
 
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
@@ -152,9 +153,33 @@ public class CriarArtigo extends InicializadorBrowser {
 	@FindBy(xpath="//a[contains(@class,'fas fa-times vermelho btnExcluiRelProjTipAssu')]")
 	private WebElement btnExcluirRelacionamento;
 	
-	@FindBy(xpath="//*[@id=\"tblRelProjTipAssun\"]/tbody/tr")
-	private WebElement tabelaRelacionamento;
-
+	@FindBy(id="ddlTelas")
+	private WebElement valorRelacionarTela;
+	
+	@FindBy(id="lnkAddTela")
+	private WebElement btnAdiconarRelacionarTela;
+	
+	//Aba Permissões
+	@FindBy(xpath="//span[contains(.,'Permissões')]")
+	private WebElement abaPermissao;
+	
+	@FindBy(xpath="//span[contains(.,'Livre')]")
+	private WebElement permissaoLivre;
+	
+	@FindBy(id="analista")
+	private WebElement permissaoAnalista;
+	
+	@FindBy(id="lnkSair")
+	private WebElement sairDoSistema;
+	
+	@FindBy(id="login")
+	private WebElement userSistema;
+	
+	@FindBy(id="senha")
+	private WebElement senhaSistema;
+	
+	@FindBy(id="outrologin")
+	private WebElement usuarioAcesso;
 	
 	public CriarArtigo(ChromeDriver driver) {
 		super(driver);
@@ -269,8 +294,10 @@ public class CriarArtigo extends InicializadorBrowser {
 		metodos.tempo(2);
 		pesquisarArtigos.click();
 		metodos.tempo(3);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", txtComentario);
 		txtComentario.click();
 		txtComentario.sendKeys(comentario);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btnComentar);
 		btnComentar.click();
 		metodos.tempo(2);
 		aprovarComentario.click();
@@ -291,7 +318,7 @@ public class CriarArtigo extends InicializadorBrowser {
 		motivoReprovacaocomentario.sendKeys(motivoReporvar);
 		metodos.tempo(2);
 		btnEnviarReprovacaoComentario.click();
-		metodos.tempo(2);
+		metodos.tempo(4);
 		txtComentario.click();
 		txtComentario.sendKeys(comentario);
 		metodos.tempo(2);
@@ -316,43 +343,96 @@ public class CriarArtigo extends InicializadorBrowser {
 		metodos.SelectDropDown(relacionnamentoAssunto, assuntoRel);
 		metodos.tempo(2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btnRelacionarCategorizacao);
-		//btnRelacionarCategorizacao.click();
 		metodos.tempo(3);
-		//*[@id="tblRelProjTipAssun"]/tbody/tr[1]/td[2]
-		
-	//	/boolean valorestabela = tabelaRelacionamento.isDisplayed();
-		//System.out.println(valorestabela);
-		//if(valorestabela==true) {
-			
 
-	//	}
-	//	else {
-			
-			if (metodos.verificarElemento(tabelaRelacionamento) ==true) {
-				
-				btnExcluirRelacionamento.click();
-			}else {
-			
-			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btnRelacionarCategorizacao);
+			    try {
+			    	WebElement tableaRelacionamento =driver.findElement(By.xpath("//*[@id=\"tblRelProjTipAssun\"]/tbody/tr"));
+			        System.out.println(tableaRelacionamento +"Elemento Existe");
+			        btnExcluirRelacionamento.click();
+			        driver.switchTo().alert().accept();
+			        metodos.tempo(2);
+			        btnRelacionarCategorizacao.click();
+			        metodos.tempo(2);
+
+			    } catch (Exception e) {
+			        System.out.println(e+"Elemento não existe");
 			btnRelacionarCategorizacao.click();
-		}
+			    }
+			    metodos.tempo(2);
+			    btnRelacionarCategorizacao.click();
+			    
+			    driver.switchTo().alert().accept();
+			    metodos.tempo(2);
+			    btnExcluirRelacionamento.click();
+			    driver.switchTo().alert().accept();
+			    metodos.tempo(2);
+			    btnRelacionarCategorizacao.click();
+			    metodos.tempo(2);
 		btnSalvar.click();
-		metodos.tempo(3);
-		
-		//*[@id="tblRelProjTipAssun"]/tbody/tr
-		//ystem.out.println(driver.findElement(By.xpath("//*[@id=\"tblRelProjTipAssun\"]/tbody/tr")).getText());
-		//assertTrue("Relacionamento não existe", driver.findElement(By.xpath("//*[@id=\"tblRelProjTipAssun\"]/tbody/tr")).getText().equals("Aplicativos Adobe Acrobat - Professional Configurar"));
-				//*[@id="tblRelProjTipAssun"]/tbody/tr[2]
-		
-		
-	//	WebElement element = btnExcluirRelacionamento; // Your element
-	//	JavascriptExecutor executor = (JavascriptExecutor) driver;
-		//Object aa=executor.executeScript("var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;", element);
-		//System.out.println(aa.toString());
+		metodos.tempo(6);
+
 		
 		
 	}
-	
-
+	public void relacionarTela (String nomeTela, String telaSelecionada) {
+		pesquisaGlobal.sendKeys(nomeTela,Keys.ENTER);
+		metodos.tempo(2);
+		pesquisarArtigos.click();
+		metodos.tempo(3);
+		editaArtigo.click();
+		metodos.tempo(2);
+		abaRelacionnamento.click();
+		metodos.tempo(2);
+		metodos.SelectDropDown(valorRelacionarTela, telaSelecionada);
+		metodos.tempo(2);
+		btnAdiconarRelacionarTela.click();
+		//*[@id="tblRelTelas"]/tbody/tr/td[1]
+		
+	}
+	public void permissaoArtigo (String nomeArtigo, String tipoPermissao, String usuarioAdm, String senhaAdm, String usuario) throws Exception {
+		pesquisaGlobal.sendKeys(nomeArtigo,Keys.ENTER);
+		metodos.tempo(2);
+		pesquisarArtigos.click();
+		metodos.tempo(3);
+		editaArtigo.click();
+		metodos.tempo(2);
+		abaPermissao.click();
+		metodos.tempo(2);
+		driver.findElement(By.xpath("//span[contains(.,'"+tipoPermissao+"')]")).click();
+		metodos.tempo(3);
+		btnSalvar.click();
+		metodos.tempo(2);
+		sairDoSistema.click();
+		metodos.tempo(1);
+		driver.switchTo().alert().accept();
+		metodos.tempo(3);
+		
+		if (tipoPermissao.equals("Analista")) {
+			
+			userSistema.sendKeys(usuarioAdm);
+			senhaSistema.sendKeys(senhaAdm);		
+			senhaSistema.submit();
+			usuarioAcesso.clear();
+			usuarioAcesso.sendKeys(usuario);		
+			usuarioAcesso.submit();
+			metodos.tempo(3);
+			
+			
+			buscarArtigo(nomeArtigo);
+			}
+		else {
+			userSistema.sendKeys(usuarioAdm);
+			senhaSistema.sendKeys(senhaAdm);		
+			senhaSistema.submit();
+			usuarioAcesso.clear();
+			usuarioAcesso.sendKeys(usuario);
+			usuarioAcesso.submit();
+			metodos.tempo(3);
+			buscarArtigo(nomeArtigo);
+			
+		}
+		
+		
+	}
 }
 
