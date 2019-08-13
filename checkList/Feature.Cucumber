@@ -1,0 +1,14 @@
+
+Feature: usuário acessando como Administrador
+	Verify usuario acessa
+
+	Scenario Outline: Autenticação no sistema com usuário administrador
+	Given logar user "<user>"e pass "<Pass>"
+	When usuario insere suas credencias "<user>"
+	Then a página inicial e acessada
+
+	Examples:
+	
+	|user 		|Pass 		|
+	
+	|cervello	|cervello01 |

@@ -13,17 +13,19 @@ public class ExecutarFazerLogin extends DriversSelenium {
 	MetodoUtil metodos = new MetodoUtil(driver);
 	
 	
-	public void fazerLogin(String usuarioAdm, String usuario, String senha){
+	public void fazerLogin(String usuarioAdm, String usuario, String senha) throws Throwable{
 		driver.get("http://10.254.16.80/17042019-v2018");
 		//driver.get("http://186.237.202.19/CervelloPortal/");
-		regrasLogin.user(usuarioAdm, senha);
-		regrasLogin.submit();
+		regrasLogin.logar_usuario(usuarioAdm, senha);
+	//	regrasLogin.submit();
 		metodos.tempo(2);
-		regrasLogin.escolherUsuario(usuario);
+		regrasLogin.usuario_insere_suas_credencias(usuario);
+		regrasLogin.a_página_inicial_e_acessada();
 		metodos.tempo(3);
 		}
 	@Test
-	public void executaLogin (){
+	public void executaLogin () throws Throwable
+	{
 		fazerLogin(valoresUsuario.getUsuarioAdm(), valoresUsuario.getUsuario(), valoresUsuario.getSenha());
 		
 	}

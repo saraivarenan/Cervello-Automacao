@@ -17,7 +17,7 @@ public class ExecultarEditarArtigo extends DriversSelenium  {
 	ParametroCriarArtigo valoresArtigo = new ParametroCriarArtigo();
 
 		@Test
-		public void editarArtigo () throws AWTException{
+		public void editarArtigo () throws Throwable{
 			fazerLogin.executaLogin();
 			pageHome.entrarModuloBasedeConhecimento();
 			editaartigo.editarArtigo(valoresArtigo.getNome());

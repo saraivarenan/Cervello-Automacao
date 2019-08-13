@@ -14,7 +14,7 @@ public class ExecutarPermissaoAnalista extends DriversSelenium {
 	ParametroFazerLogin acessoSistema = new ParametroFazerLogin ();
 	ParametroCriarArtigo artigo = new ParametroCriarArtigo();
 @Test
-public void executarpermissao() throws Exception {
+public void executarpermissao() throws Throwable {
 	fazerLogin.executaLogin();
 	permissao.permissaoArtigo(artigo.getNome(), "Analista",acessoSistema.getUsuarioAdm(),acessoSistema.getSenha(), acessoSistema.getUsuarioComum());
 		

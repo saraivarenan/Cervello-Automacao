@@ -1,37 +1,42 @@
 package backEnd;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 public class ParametroFazerLogin {
+		
+	public WebDriver driver;
+		
+	@FindBy(id="login")
+	public WebElement userName;
+
+   @FindBy(id="senha")
+   public WebElement userPass;
+   
+   
+   @FindBy(id="outrologin")
+   public WebElement escolherUsuario;
+
+   
+   @FindBy(xpath="//button[contains(text(), 'entrar')]")
+   public WebElement btnLogar;
 	
-	String usuarioAdm = "cervello";
-	String senha = "cervello01";
-	String usuario = "cervello";
-	String usuarioComum = "10044";
-	
-	public String getUsuario() {
-		return usuario;
+	public ParametroFazerLogin(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
 	}
-	public void setUsuario(String usuario) {
-		this.usuarioAdm = usuario;
+   
+   public void userName(String usuarioNome) {
+	   this.userName.sendKeys(usuarioNome);
+   }
+	public void userPass(String senha) {
+		this.userPass.sendKeys(senha);
 	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	public String getUsuarioAdm() {
-		return usuarioAdm;
-	}
-	public void setUsuarioAdm(String usuarioAdm) {
-		this.usuarioAdm = usuarioAdm;
-	}
-	public String getUsuarioComum() {
-		return usuarioComum;
-	}
-	public void setUsuarioComum(String usuarioComum) {
-		this.usuarioComum = usuarioComum;
-	}
-	
-	
+	public void outrousuario(String usuarioEscolhido) {
+		this.escolherUsuario.sendKeys(usuarioEscolhido);
+		
+	}	
 
 }

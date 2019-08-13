@@ -3,10 +3,10 @@ package business;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.AWTException;
-import java.util.NoSuchElementException;
+import java.io.File;
+import java.io.NotActiveException;
 
-import org.junit.Assert;
-import org.openqa.selenium.Alert;
+import org.hamcrest.core.Is;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
 import backEnd.ParametroFerramentaArtigo;
+import junit.framework.Assert;
 import utilitarios.InicializadorBrowser;
 import utilitarios.MetodoUtil;
 
@@ -181,6 +182,17 @@ public class CriarArtigo extends InicializadorBrowser {
 	@FindBy(id="outrologin")
 	private WebElement usuarioAcesso;
 	
+	//Curtir artigo
+	
+	@FindBy(id="btnIconCurtir")
+	private WebElement curtirArtigo;
+	
+	@FindBy(id="btnIconNCurtir")
+	private WebElement nCurtirArtigo;
+	
+	@FindBy(id="lnkDownloadPDF")
+	private WebElement downloadArtigo;
+	
 	public CriarArtigo(ChromeDriver driver) {
 		super(driver);
 	}
@@ -191,7 +203,6 @@ public class CriarArtigo extends InicializadorBrowser {
 		metodos.tempo(1);
 		articulosArtigos.click();
 		metodos.tempo(4);
-
 		metodos.tempo(3);
 		metodos.SelectDropDown(topicoTema, valorTema);
 		metodos.tempo(2);
@@ -222,9 +233,9 @@ public class CriarArtigo extends InicializadorBrowser {
 
 		btnSalvar.click();	
 		metodos.tempo(3);
-		metodos.implicitWait(20);
-		publicarArtigo.click();
-		metodos.tempo(5);
+		//metodos.implicitWait(20);
+	//	publicarArtigo.click();
+	//	metodos.tempo(5);
 	//	driver.switchTo().alert().accept();
 	//	metodos.implicitWait(20);
 	//	mensagemSucesso.click();
@@ -433,6 +444,55 @@ public class CriarArtigo extends InicializadorBrowser {
 		}
 		
 		
+	}
+	public void gosteiArtigo (String nomeArtigo) throws Exception {
+		pesquisaGlobal.sendKeys(nomeArtigo,Keys.ENTER);
+		metodos.tempo(2);
+		pesquisarArtigos.click();		
+		metodos.tempo(2);
+		String valorCurti = curtirArtigo.getAttribute("data-curtiu");
+		
+		if (valorCurti.equals("0")) {
+			curtirArtigo.click();
+			metodos.tirarFotoTela(driver, "C:\\Users\\10044\\Documents\\Screen\\Artigos\\Curtiu_Artigo.png");
+		}
+		else {
+			System.out.println("Já está curtido");
+			metodos.tirarFotoTela(driver, "C:\\Users\\10044\\Documents\\Screen\\Artigos\\SemCurtida_Artigo.png");
+		}
+		
+	}
+	public void descurtiArtigo (String nomeArtigo) throws Exception {
+		pesquisaGlobal.sendKeys(nomeArtigo,Keys.ENTER);
+		metodos.tempo(2);
+		pesquisarArtigos.click();
+		metodos.tempo(2);
+		String valorNCurti = nCurtirArtigo.getAttribute("data-ncurtiu");
+		System.out.println(valorNCurti);
+		
+		if (valorNCurti.equals("0")) {
+			nCurtirArtigo.click();
+			metodos.tempo(2);
+			metodos.tirarFotoTela(driver, "C:\\Users\\10044\\Documents\\Screen\\Artigos\\Curtiu_Artigo.png");
+		}
+		else {
+			System.out.println("já está descurtido");
+	
+		}
+		
+	}
+	public void UltimoDownloadFeito() throws InterruptedException {
+    
+		downloadArtigo.click();
+		metodos.tempo(2);
+		
+		File listOfFiles[] = folder.listFiles();
+		//Assert.assertEquals(listOfFiles.length, Is(Not(0)));
+	//	Assert.assertEquals(IsNot<T>, listOfFiles.length);
+  
+  
+    
+  
 	}
 }
 

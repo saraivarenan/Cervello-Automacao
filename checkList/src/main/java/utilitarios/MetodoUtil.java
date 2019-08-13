@@ -25,7 +25,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class MetodoUtil extends InicializadorBrowser  {
 
-	public MetodoUtil(ChromeDriver driver) {
+	public MetodoUtil(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
