@@ -7,7 +7,7 @@ import cucumber.api.junit.*;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features = "Feature.Cucumber"	
+		features = "BasedeConhecimento.feature"
 		,glue = {"business"}
 		)
 //@Suite.SuiteClasses({

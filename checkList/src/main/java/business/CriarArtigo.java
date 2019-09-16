@@ -10,6 +10,7 @@ import org.hamcrest.core.Is;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -193,7 +194,7 @@ public class CriarArtigo extends InicializadorBrowser {
 	@FindBy(id="lnkDownloadPDF")
 	private WebElement downloadArtigo;
 	
-	public CriarArtigo(ChromeDriver driver) {
+	public CriarArtigo(WebDriver driver) {
 		super(driver);
 	}
 	
@@ -482,16 +483,12 @@ public class CriarArtigo extends InicializadorBrowser {
 		
 	}
 	public void UltimoDownloadFeito() throws InterruptedException {
-    
 		downloadArtigo.click();
-		metodos.tempo(2);
-		
+		metodos.tempo(2);		
 		File listOfFiles[] = folder.listFiles();
 		//Assert.assertEquals(listOfFiles.length, Is(Not(0)));
 	//	Assert.assertEquals(IsNot<T>, listOfFiles.length);
   
-  
-    
   
 	}
 }

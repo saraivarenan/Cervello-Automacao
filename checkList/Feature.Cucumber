@@ -9,6 +9,5 @@ Feature: usuário acessando como Administrador
 
 	Examples:
 	
-	|user 		|Pass 		|
-	
+	|user 		|Pass 		|	
 	|cervello	|cervello01 |
